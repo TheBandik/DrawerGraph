@@ -2,7 +2,7 @@ import sys
 
 import PySide2.QtWidgets as qtw
 
-from ui import MainWindow
+from ui.ui import MainWindow
 
 # Создание Qt приложения
 app = qtw.QApplication(sys.argv)

@@ -1,15 +1,16 @@
-import PySide2.QtWidgets as qtw
-import PySide2.QtCore as qtc
+from PySide2.QtWidgets import QDoubleSpinBox, QGroupBox, QHBoxLayout, QPushButton, QVBoxLayout, QWidget
+from PySide2.QtCore import QSize
 
+from graphwidget import GraphWidget
 
-class MainWindow(qtw.QWidget):
+class MainWindow(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.main_window_ui()
+        self.CreateUi()
         self.show()
 
-    def main_window_ui(self):
+    def CreateUi(self):
         self.setWindowTitle("Graph")
         self.resize(640, 480)
         # TODO иконка
@@ -17,30 +18,30 @@ class MainWindow(qtw.QWidget):
         # self.setWindowIcon(icon_main_window)
 
         # Макеты
-        self.main_layout = qtw.QHBoxLayout()
-        self.widget_layout = qtw.QVBoxLayout()
-        self.group_box_parameter_layout = qtw.QVBoxLayout()
-        self.setLayout(self.main_layout)
-        # Фрейм
-        self.frame = qtw.QFrame()
-        self.frame.setMinimumSize(qtc.QSize(200, 200))
+        self.mainLayout = QHBoxLayout()
+        self.panelLayout = QVBoxLayout()
+        self.groupBoxParameterLayout = QVBoxLayout()
+        self.setLayout(self.mainLayout)
         # Виджет
-        self.widget = qtw.QWidget()
-        self.widget.setMinimumSize(qtc.QSize(200, 0))
-        self.widget.setMaximumSize(qtc.QSize(200, 1000000))
-        self.widget.setLayout(self.widget_layout)
+        self.graphWidget = GraphWidget()
+        self.graphWidget.setMinimumSize(QSize(200, 200))
+        # Панель
+        self.panel = QWidget()
+        self.panel.setMinimumSize(QSize(200, 0))
+        self.panel.setMaximumSize(QSize(200, 1000000))
+        self.panel.setLayout(self.panelLayout)
         # Параметр
-        self.group_box_parameter = qtw.QGroupBox("Parameter", self.widget)
-        self.group_box_parameter.setLayout(self.group_box_parameter_layout)
-        self.double_spin_box = qtw.QDoubleSpinBox(self.group_box_parameter)
+        self.groupBoxParameter = QGroupBox("Parameter", self.panel)
+        self.groupBoxParameter.setLayout(self.groupBoxParameterLayout)
+        self.doubleSpinBox = QDoubleSpinBox(self.groupBoxParameter)
         # Кнопки
-        self.update_button = qtw.QPushButton("Update", self.widget)
-        self.system_button = qtw.QPushButton("System", self.widget)
+        self.updateButton = QPushButton("Update", self.panel)
+        self.systemButton = QPushButton("System", self.panel)
         # Добавление виджетов в макет
-        self.main_layout.addWidget(self.frame)
-        self.main_layout.addWidget(self.widget)
-        self.group_box_parameter_layout.addWidget(self.double_spin_box)
-        self.widget_layout.addWidget(self.group_box_parameter)
-        self.widget_layout.addWidget(self.update_button)
-        self.widget_layout.addWidget(self.system_button)
-        self.widget_layout.addStretch()
+        self.mainLayout.addWidget(self.graphWidget)
+        self.mainLayout.addWidget(self.panel)
+        self.groupBoxParameterLayout.addWidget(self.doubleSpinBox)
+        self.panelLayout.addWidget(self.groupBoxParameter)
+        self.panelLayout.addWidget(self.updateButton)
+        self.panelLayout.addWidget(self.systemButton)
+        self.panelLayout.addStretch()
