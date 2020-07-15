@@ -1,7 +1,15 @@
-from PySide2.QtWidgets import QDoubleSpinBox, QGroupBox, QHBoxLayout, QPushButton, QVBoxLayout, QWidget
+from PySide2.QtWidgets import (
+    QDoubleSpinBox,
+    QGroupBox,
+    QHBoxLayout,
+    QPushButton,
+    QVBoxLayout,
+    QWidget
+)
 from PySide2.QtCore import QSize
 
 from graphwidget import GraphWidget
+
 
 class MainWindow(QWidget):
 
@@ -12,7 +20,7 @@ class MainWindow(QWidget):
 
     def CreateUi(self):
         self.setWindowTitle("Graph")
-        self.resize(640, 480)
+        self.resize(640, 380)
         # TODO иконка
         # icon_main_window = QIcon("icon_main_window.png")
         # self.setWindowIcon(icon_main_window)
@@ -24,7 +32,6 @@ class MainWindow(QWidget):
         self.setLayout(self.mainLayout)
         # Виджет
         self.graphWidget = GraphWidget()
-        self.graphWidget.setMinimumSize(QSize(200, 200))
         # Панель
         self.panel = QWidget()
         self.panel.setMinimumSize(QSize(200, 0))

@@ -1,3 +1,4 @@
 *.pyc
 uic.py
 untitled.ui
+*.json
