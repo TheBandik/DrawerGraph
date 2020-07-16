@@ -2,4 +2,4 @@ lint:
   image: bildcode/pyside2
 
   script:
-   - mpython3 -m flake8 .
+   - python3 -m flake8 .
