@@ -1,13 +1,5 @@
-test:
-  image: mvodya/pyside2-x11
+lint:
+  image: bildcode/pyside2
 
   script:
    - python3 -m flake8 .
-   - nohup python3 main.py &
-   - sleep 5
-   - scrot screenshot.png
-
-  artifacts:
-    expire_in:
-    paths:
-     - ./screenshot.png
