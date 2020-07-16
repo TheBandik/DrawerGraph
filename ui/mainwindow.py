@@ -8,7 +8,7 @@ from PySide2.QtWidgets import (
 )
 from PySide2.QtCore import QSize
 
-from graphwidget import GraphWidget
+from .graphwidget import GraphWidget
 
 
 class MainWindow(QWidget):
