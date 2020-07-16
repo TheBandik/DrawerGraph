@@ -3,6 +3,7 @@ from PySide2.QtGui import QPainter, QPixmap, Qt
 
 from drawer import Drawer
 
+
 class GraphWidget(QWidget):
 
     def __init__(self):
