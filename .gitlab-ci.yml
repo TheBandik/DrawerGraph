@@ -8,6 +8,6 @@ test:
    - scrot screenshot.png
 
    artifacts:
-    expire_in:
+    expire_in: 0
     paths:
      - ./screenshot.png
