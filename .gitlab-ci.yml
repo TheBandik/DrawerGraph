@@ -7,7 +7,7 @@ test:
    - sleep 5
    - scrot screenshot.png
 
-   artifacts:
-    expire_in: 0
+  artifacts:
+    expire_in:
     paths:
      - ./screenshot.png
