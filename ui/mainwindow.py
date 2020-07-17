@@ -1,7 +1,7 @@
 from PySide2.QtWidgets import (
     QDoubleSpinBox,
     QGroupBox,
-    QHBoxLayout,
+    QGridLayout,
     QPushButton,
     QVBoxLayout,
     QWidget
@@ -21,17 +21,11 @@ class MainWindow(QWidget):
     def CreateUi(self):
         self.setWindowTitle("Graph")
         self.resize(640, 380)
-        # TODO иконка
-        # icon_main_window = QIcon("icon_main_window.png")
-        # self.setWindowIcon(icon_main_window)
-
         # Макеты
-        self.mainLayout = QHBoxLayout()
+        self.mainLayout = QGridLayout()
         self.panelLayout = QVBoxLayout()
         self.groupBoxParameterLayout = QVBoxLayout()
         self.setLayout(self.mainLayout)
-        # Виджет
-        self.graphWidget = GraphWidget()
         # Панель
         self.panel = QWidget()
         self.panel.setMinimumSize(QSize(200, 0))
@@ -41,14 +35,28 @@ class MainWindow(QWidget):
         self.groupBoxParameter = QGroupBox("Parameter", self.panel)
         self.groupBoxParameter.setLayout(self.groupBoxParameterLayout)
         self.doubleSpinBox = QDoubleSpinBox(self.groupBoxParameter)
+        self.doubleSpinBox.setMinimum(1.0)
+        self.doubleSpinBox.setMaximum(100.0)
+        self.doubleSpinBox.setValue(3.0)
+        self.param = self.doubleSpinBox.value()
         # Кнопки
         self.updateButton = QPushButton("Update", self.panel)
         self.systemButton = QPushButton("System", self.panel)
+        # Действие кнопки
+        self.updateButton.clicked.connect(self.updateIsClicked)
+        # Виджет
+        self.graphWidget = GraphWidget(self.param)
         # Добавление виджетов в макет
-        self.mainLayout.addWidget(self.graphWidget)
-        self.mainLayout.addWidget(self.panel)
+        self.mainLayout.addWidget(self.graphWidget, 0, 0)
+        self.mainLayout.addWidget(self.panel, 0, 1)
         self.groupBoxParameterLayout.addWidget(self.doubleSpinBox)
         self.panelLayout.addWidget(self.groupBoxParameter)
         self.panelLayout.addWidget(self.updateButton)
         self.panelLayout.addWidget(self.systemButton)
         self.panelLayout.addStretch()
+
+    def updateIsClicked(self):
+        self.param = self.doubleSpinBox.value()
+        self.graphWidget.close()
+        self.graphWidget = GraphWidget(self.param)
+        self.mainLayout.addWidget(self.graphWidget, 0, 0)

@@ -4,12 +4,14 @@ from PySide2.QtGui import QPen
 
 class Curve():
 
-    def __init__(self, graphwidget, painter):
+    def __init__(self, graphwidget, painter, param):
         self.graphwidget = graphwidget
         self.painter = painter
+        self.param = param * 10
         self.first = True
         self.lastCoord = QPointF()
-        self.origin = QPointF(self.graphwidget.width() / 2, self.graphwidget.height() / 2)
+        self.origin = QPointF(self.graphwidget.width() / 2,
+                              self.graphwidget.height() / 2)
         self.draw()
 
     def draw(self):
@@ -28,9 +30,8 @@ class Curve():
             fi += 0.1
 
     def findPoint(self, t):
-        a = 30
         coord = QPointF()
-        coord.setX((2 * a * t ** 2) / (1 + t ** 2))
-        coord.setY((2 * a * t ** 3) / (1 + t ** 2))
+        coord.setX((2 * self.param * t ** 2) / (1 + t ** 2))
+        coord.setY((2 * self.param * t ** 3) / (1 + t ** 2))
         coord += self.origin
         return coord
