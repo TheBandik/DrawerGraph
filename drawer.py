@@ -1,5 +1,5 @@
-from plot.gridcartesian import GridCartesian
-
+from grid.gridcartesian import GridCartesian
+from curve.curve import Curve
 
 class Drawer():
 
@@ -10,3 +10,4 @@ class Drawer():
 
     def drawGraph(self):
         GridCartesian(self.graphwidget, self.painter)
+        Curve(self.graphwidget, self.painter)

@@ -1,8 +1,8 @@
-from .plot import Plot
+from .grid import Grid
 from PySide2.QtGui import QPen, Qt
 
 
-class GridCartesian(Plot):
+class GridCartesian(Grid):
 
     def __init__(self, graphwidget, painter):
         self.graphwidget = graphwidget
