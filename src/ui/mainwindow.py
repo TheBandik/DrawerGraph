@@ -4,7 +4,8 @@ from PySide2.QtWidgets import (
     QHBoxLayout,
     QPushButton,
     QVBoxLayout,
-    QWidget
+    QWidget,
+    QCheckBox
 )
 from PySide2.QtCore import QSize
 
@@ -41,20 +42,26 @@ class MainWindow(QWidget):
         self.a = self.doubleSpinBox.value()
         # Кнопки
         self.updateButton = QPushButton("Update", self.panel)
-        self.systemButton = QPushButton("System", self.panel)
+        self.polarCheck = QCheckBox("Polar system", self.panel)
         # Действие кнопки
         self.updateButton.clicked.connect(self.updateIsClicked)
+        self.polarCheck.clicked.connect(self.unablePolar)
+        self.polar = self.polarCheck.checkState()
         # Виджет
-        self.graphWidget = GraphWidget(self.a)
+        self.graphWidget = GraphWidget(self.a, self.polar)
         # Добавление виджетов в макет
         self.mainLayout.addWidget(self.graphWidget)
         self.mainLayout.addWidget(self.panel)
         self.groupBoxParameterLayout.addWidget(self.doubleSpinBox)
         self.panelLayout.addWidget(self.groupBoxParameter)
         self.panelLayout.addWidget(self.updateButton)
-        self.panelLayout.addWidget(self.systemButton)
+        self.panelLayout.addWidget(self.polarCheck)
         self.panelLayout.addStretch()
 
     def updateIsClicked(self):
         self.a = self.doubleSpinBox.value()
-        self.graphWidget.setParams(self.a)
+        self.graphWidget.setParams(self.a, self.polar)
+
+    def unablePolar(self):
+        self.polar = self.polarCheck.checkState()
+        self.graphWidget.setParams(self.a, self.polar)

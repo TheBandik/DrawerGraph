@@ -1,6 +1,7 @@
-from .grid import Grid
 from PySide2.QtGui import QPen, Qt
 from PySide2.QtCore import QPoint
+
+from .grid import Grid
 
 
 class GridCartesian(Grid):

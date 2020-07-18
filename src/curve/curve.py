@@ -14,7 +14,7 @@ class Curve():
         self.draw()
 
     def draw(self):
-        pen = QPen(Qt.red, 1, Qt.SolidLine)
+        pen = QPen(Qt.blue, 1, Qt.SolidLine)
         self.painter.setPen(pen)
         fi = -12
         while fi <= 12:
