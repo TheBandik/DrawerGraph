@@ -8,7 +8,6 @@ class Curve():
         self.graphwidget = graphwidget
         self.painter = painter
         self.a = a * 10
-        self.first = True
         self.lastCoord = QPointF()
         self.origin = QPointF(self.graphwidget.width() / 2,
                               self.graphwidget.height() / 2)
@@ -21,11 +20,7 @@ class Curve():
         while fi <= 12:
             point = QPointF()
             point = self.findPoint(fi)
-            if self.first:
-                self.first = False
-            else:
-                self.painter.drawLine(point, self.lastCoord)
-
+            self.painter.drawLine(point, self.lastCoord)
             self.lastCoord = point
             fi += 0.01
 

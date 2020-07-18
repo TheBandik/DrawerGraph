@@ -10,6 +10,7 @@ class GraphWidget(QWidget):
         super().__init__()
         self.a = a
         self.painter = QPainter()
+        self.setMinimumSize(472, 358)
 
     def setParams(self, a):
         self.a = a

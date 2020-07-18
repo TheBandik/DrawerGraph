@@ -13,6 +13,8 @@ class GridCartesian(Grid):
         self.origin = QPoint(self.graphwidget.width() / 2,
                              self.graphwidget.height() / 2)
         self.grid()
+        self.labels()
+        self.labelsPX()
         self.axis()
 
     def grid(self):
@@ -38,3 +40,22 @@ class GridCartesian(Grid):
             self.painter.drawLine(i, 0, i, self.height)
         for i in range(self.origin.y(), self.height, 20):
             self.painter.drawLine(self.width / 2, i, self.width, i)
+
+    def labels(self):
+        pen = QPen(Qt.black, 1)
+        self.painter.setPen(pen)
+        # Отриц. ось x
+        label = -2
+        for i in range(self.origin.x() - 47, 0, -20):
+            self.painter.drawText(i, self.height // 2 + 15, str(label))
+            label -= 1
+        # Пол. ось y
+        label = 2
+        for i in range(self.origin.y() - 36, 0, -20):
+            self.painter.drawText(self.width // 2 + 9, i, str(label))
+            label += 1
+        # Отриц. ось y
+        label = -2
+        for i in range(self.origin.y() + 45, self.height, 20):
+            self.painter.drawText(self.width // 2 + 5, i, str(label))
+            label -= 1
