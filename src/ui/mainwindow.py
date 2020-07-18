@@ -1,7 +1,7 @@
 from PySide2.QtWidgets import (
     QDoubleSpinBox,
     QGroupBox,
-    QGridLayout,
+    QHBoxLayout,
     QPushButton,
     QVBoxLayout,
     QWidget
@@ -22,7 +22,7 @@ class MainWindow(QWidget):
         self.setWindowTitle("Graph")
         self.resize(700, 380)
         # Макеты
-        self.mainLayout = QGridLayout()
+        self.mainLayout = QHBoxLayout()
         self.panelLayout = QVBoxLayout()
         self.groupBoxParameterLayout = QVBoxLayout()
         self.setLayout(self.mainLayout)
@@ -38,17 +38,17 @@ class MainWindow(QWidget):
         self.doubleSpinBox.setMinimum(1.0)
         self.doubleSpinBox.setMaximum(100.0)
         self.doubleSpinBox.setValue(3.0)
-        self.param = self.doubleSpinBox.value()
+        self.a = self.doubleSpinBox.value()
         # Кнопки
         self.updateButton = QPushButton("Update", self.panel)
         self.systemButton = QPushButton("System", self.panel)
         # Действие кнопки
         self.updateButton.clicked.connect(self.updateIsClicked)
         # Виджет
-        self.graphWidget = GraphWidget(self.param)
+        self.graphWidget = GraphWidget(self.a)
         # Добавление виджетов в макет
-        self.mainLayout.addWidget(self.graphWidget, 0, 0)
-        self.mainLayout.addWidget(self.panel, 0, 1)
+        self.mainLayout.addWidget(self.graphWidget)
+        self.mainLayout.addWidget(self.panel)
         self.groupBoxParameterLayout.addWidget(self.doubleSpinBox)
         self.panelLayout.addWidget(self.groupBoxParameter)
         self.panelLayout.addWidget(self.updateButton)
@@ -56,7 +56,5 @@ class MainWindow(QWidget):
         self.panelLayout.addStretch()
 
     def updateIsClicked(self):
-        self.param = self.doubleSpinBox.value()
-        self.graphWidget.close()
-        self.graphWidget = GraphWidget(self.param)
-        self.mainLayout.addWidget(self.graphWidget, 0, 0)
+        self.a = self.doubleSpinBox.value()
+        self.graphWidget.setParams(self.a)

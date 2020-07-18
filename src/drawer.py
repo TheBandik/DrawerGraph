@@ -4,12 +4,12 @@ from curve.curve import Curve
 
 class Drawer():
 
-    def __init__(self, graphwidget, painter, param):
+    def __init__(self, graphwidget, painter, a):
         self.graphwidget = graphwidget
         self.painter = painter
-        self.param = param
+        self.a = a
         self.drawGraph()
 
     def drawGraph(self):
         GridCartesian(self.graphwidget, self.painter)
-        Curve(self.graphwidget, self.painter, self.param)
+        Curve(self.graphwidget, self.painter, self.a)

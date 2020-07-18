@@ -6,12 +6,16 @@ from drawer import Drawer
 
 class GraphWidget(QWidget):
 
-    def __init__(self, param):
+    def __init__(self, a):
         super().__init__()
+        self.a = a
         self.painter = QPainter()
-        self.param = param
+
+    def setParams(self, a):
+        self.a = a
+        self.repaint()
 
     def paintEvent(self, event):
         self.painter.begin(self)
-        Drawer(self, self.painter, self.param)
+        Drawer(self, self.painter, self.a)
         self.painter.end()
