@@ -20,7 +20,7 @@ class MainWindow(QWidget):
 
     def CreateUi(self):
         self.setWindowTitle("Graph")
-        self.resize(640, 380)
+        self.resize(700, 380)
         # Макеты
         self.mainLayout = QGridLayout()
         self.panelLayout = QVBoxLayout()
