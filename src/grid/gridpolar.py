@@ -25,8 +25,8 @@ class GridPolar(Grid):
     def grid(self):
         pen = QPen(Qt.red, 1, Qt.DotLine)
         self.painter.setPen(pen)
-        factor = self.width // 3 if self.width > self.height else self.height // 3
-        for i in range(0, factor, 20):
+        n = self.width // 3 if self.width > self.height else self.height // 3
+        for i in range(0, n, 20):
             self.painter.drawEllipse(self.origin, i, i)
 
     def addAxis(self):
