@@ -43,10 +43,12 @@ class MainWindow(QWidget):
         # Кнопки
         self.updateButton = QPushButton("Update", self.panel)
         self.polarCheck = QCheckBox("Polar system", self.panel)
+        self.animation = QCheckBox("Animation", self.panel)
         # Действие кнопки
         self.updateButton.clicked.connect(self.updateIsClicked)
         self.polarCheck.clicked.connect(self.unablePolar)
         self.polar = self.polarCheck.checkState()
+        self.animation.clicked.connect(self.startAnimation)
         # Виджет
         self.graphWidget = GraphWidget(self.a, self.polar)
         # Добавление виджетов в макет
@@ -56,6 +58,7 @@ class MainWindow(QWidget):
         self.panelLayout.addWidget(self.groupBoxParameter)
         self.panelLayout.addWidget(self.updateButton)
         self.panelLayout.addWidget(self.polarCheck)
+        self.panelLayout.addWidget(self.animation)
         self.panelLayout.addStretch()
 
     def updateIsClicked(self):
@@ -65,3 +68,9 @@ class MainWindow(QWidget):
     def unablePolar(self):
         self.polar = self.polarCheck.checkState()
         self.graphWidget.setParams(self.a, self.polar)
+
+    def startAnimation(self):
+        if self.animation.checkState():
+            self.graphWidget.startAnimation()
+        else:
+            self.graphWidget.stopAnimation()
