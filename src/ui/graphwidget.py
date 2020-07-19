@@ -28,6 +28,7 @@ class GraphWidget(QWidget):
 
     def setParams(self, a, polar):
         self.a = a
+        self.animParam = a * 10
         self.polar = polar
         self.repaint()
 
