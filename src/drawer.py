@@ -3,18 +3,25 @@ from plot.gridpolar import GridPolar
 from plot.curve import Curve
 
 
+# Вызывает методы рисования
 class Drawer():
 
-    def __init__(self, graphwidget, painter, a, polar):
-        self.graphwidget = graphwidget
+    def __init__(self, graphWidget, painter, a, polar):
+        # Определение полученных переменных
+        self.graphWidget = graphWidget
         self.painter = painter
         self.a = a
         self.polar = polar
-        self.drawGraph()
+        # Запуск рисования
+        self.drawPlot()
 
-    def drawGraph(self):
+    def drawPlot(self):
+        # Рисование сетки
         if self.polar:
-            GridPolar(self.graphwidget, self.painter)
+            # Полярная
+            GridPolar(self.graphWidget, self.painter)
         else:
-            GridCartesian(self.graphwidget, self.painter)
-        Curve(self.graphwidget, self.painter, self.a)
+            # Прямоугольная
+            GridCartesian(self.graphWidget, self.painter)
+        # Рисование кривой
+        Curve(self.graphWidget, self.painter, self.a)
