@@ -27,9 +27,9 @@ class Curve():
         pen = QPen(Qt.blue, 1, Qt.SolidLine)
         self.painter.setPen(pen)
         # Начальная точка
-        fi = floor(self.graphWidget.height() / -35.8 / (self.a / 10))
+        fi = floor(self.graphWidget.height() / -35.8 / (self.a / 10) - .5)
         # Конечная точка
-        end = ceil(self.graphWidget.height() / 35.8 / (self.a / 10))
+        end = ceil(self.graphWidget.height() / 35.8 / (self.a / 10) + .5)
         # Отрисовка всех точек
         while fi <= end:
             # Нахождение точки

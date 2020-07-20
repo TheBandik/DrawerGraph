@@ -42,11 +42,11 @@ class MainWindow(QWidget):
         self.panel.setLayout(self.panelLayout)
 
         # Параметр
-        self.groupBoxParameter = QGroupBox("Parameter", self.panel)
+        self.groupBoxParameter = QGroupBox("Parameter (1 - 50)", self.panel)
         self.groupBoxParameter.setLayout(self.groupBoxParameterLayout)
         self.doubleSpinBox = QDoubleSpinBox(self.groupBoxParameter)
         self.doubleSpinBox.setMinimum(1.0)
-        self.doubleSpinBox.setMaximum(100.0)
+        self.doubleSpinBox.setMaximum(50.0)
         self.doubleSpinBox.setValue(3.0)
         self.a = self.doubleSpinBox.value()
 

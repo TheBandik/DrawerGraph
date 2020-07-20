@@ -70,9 +70,9 @@ class GraphWidget(QWidget):
         # Зацикливание
         self.anim.setLoopCount(-1)
         # Начальное значение времени анимации
-        self.anim.setStartValue(floor(self.height() / -35.8 / self.a))
+        self.anim.setStartValue(floor(self.height() / -35.8 / self.a) - .5)
         # Конечное значение времени анимации
-        self.anim.setEndValue(ceil(self.height() / 35.8 / self.a))
+        self.anim.setEndValue(ceil(self.height() / 35.8 / self.a) + .5)
         # Старт
         self.anim.start()
 
@@ -97,8 +97,8 @@ class GraphWidget(QWidget):
         # Установка новых начального и конечного значений времени анимации
         if self.animation:
             self.anim.pause()
-            self.anim.setStartValue(floor(self.height() / -35.8 / self.a))
-            self.anim.setEndValue(ceil(self.height() / 35.8 / self.a))
+            self.anim.setStartValue(floor(self.height() / -35.8 / self.a) - .5)
+            self.anim.setEndValue(ceil(self.height() / 35.8 / self.a) + .5)
             self.anim.resume()
 
     # Определение нового свойства подсчета времени анимации для виджета
