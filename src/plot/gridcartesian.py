@@ -15,11 +15,16 @@ class GridCartesian(Grid):
         self.width = self.graphWidget.width()
         self.height = self.graphWidget.height()
         self.origin = QPoint(self.width / 2, self.height / 2)
+        # Отрисовка сетки
         self.grid()
+        # Отрисовка цифр на осях
         self.labels()
+        # Отрисовка цифр на оси X
         self.labelsPX()
+        # Отрисовка осей координат
         self.axis()
 
+    # Отрисовка сетки
     def grid(self):
         pen = QPen(Qt.gray, 1, Qt.DotLine)
         self.painter.setPen(pen)
@@ -44,6 +49,7 @@ class GridCartesian(Grid):
         for i in range(self.origin.y(), self.height, 20):
             self.painter.drawLine(self.width / 2, i, self.width, i)
 
+    # Отрисовка цифр на осях
     def labels(self):
         pen = QPen(Qt.black, 1)
         self.painter.setPen(pen)
