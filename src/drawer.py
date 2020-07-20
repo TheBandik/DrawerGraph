@@ -1,6 +1,6 @@
-from grid.gridcartesian import GridCartesian
-from grid.gridpolar import GridPolar
-from curve.curve import Curve
+from plot.gridcartesian import GridCartesian
+from plot.gridpolar import GridPolar
+from plot.curve import Curve
 
 
 class Drawer():
