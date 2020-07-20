@@ -18,9 +18,9 @@ class GraphWidget(QWidget):
         # Параметр a с коэффициентом для анимации
         self.animParam = a * 10
         # Переменные для анимации
+        self.time = -12
         self.anim = QPropertyAnimation(self, b"animationTime")
         self.painter = QPainter()
-        self.time = -12
         self.animation = False
         # Параметр области отрисовки
         self.setMinimumSize(472, 360)
@@ -95,10 +95,11 @@ class GraphWidget(QWidget):
     # Ивент масштабирования
     def resizeEvent(self, event):
         # Установка новых начального и конечного значений времени анимации
-        self.anim.pause()
-        self.anim.setStartValue(floor(self.height() / -35.8 / self.a))
-        self.anim.setEndValue(ceil(self.height() / 35.8 / self.a))
-        self.anim.resume()
+        if self.animation:
+            self.anim.pause()
+            self.anim.setStartValue(floor(self.height() / -35.8 / self.a))
+            self.anim.setEndValue(ceil(self.height() / 35.8 / self.a))
+            self.anim.resume()
 
     # Определение нового свойства подсчета времени анимации для виджета
     animationTime = Property(float, animationTime, setAnimationTime)
