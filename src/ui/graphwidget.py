@@ -15,11 +15,11 @@ class GraphWidget(QWidget):
         self.animParam = a * 10
         self.polar = polar
         self.painter = QPainter()
-        self.setMinimumSize(472, 358)
+        self.setMinimumSize(472, 360)
         self.time = -12
         self.animation = False
         self.anim = QPropertyAnimation(self, b"animationTime")
-        self.origin = QPointF(472 / 2, 358 / 2)
+        self.origin = QPointF(472 / 2, 360 / 2)
 
     def animationTime(self):
         return self.time
@@ -32,6 +32,8 @@ class GraphWidget(QWidget):
         self.a = a
         self.animParam = a * 10
         self.polar = polar
+        self.anim.stop()
+        self.startAnimation()
         self.repaint()
 
     def paintEvent(self, event):
