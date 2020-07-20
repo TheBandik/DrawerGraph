@@ -1,12 +1,12 @@
 import sys
 
-import PySide2.QtWidgets as qtw
+from PySide2.QtWidgets import QApplication
 
 from ui.mainwindow import MainWindow
 
 # Создание Qt приложения
-app = qtw.QApplication(sys.argv)
-# Создание и вызов диалогового окна
+app = QApplication(sys.argv)
+# Создание и вызов окна
 ex_main_window = MainWindow()
 # Запуск основного Qt цикла
 sys.exit(app.exec_())
