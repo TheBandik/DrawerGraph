@@ -15,8 +15,7 @@ class GridPolar(Grid):
         self.width = self.graphWidget.width()
         self.height = self.graphWidget.height()
         # Центр координат
-        self.origin = QPoint(self.width / 2,
-                             self.height / 2)
+        self.origin = QPoint(self.width / 2, self.height / 2)
         # Линия координат
         self.line = QLineF()
         self.line.setP1(self.origin)

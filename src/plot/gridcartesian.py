@@ -4,15 +4,17 @@ from PySide2.QtCore import QPoint
 from .grid import Grid
 
 
+# Отрисовка прямоугольной сетки
 class GridCartesian(Grid):
 
-    def __init__(self, graphwidget, painter):
-        self.graphwidget = graphwidget
+    def __init__(self, graphWidget, painter):
+        # Определение полученных переменных
+        self.graphWidget = graphWidget
         self.painter = painter
-        self.width = self.graphwidget.width()
-        self.height = self.graphwidget.height()
-        self.origin = QPoint(self.graphwidget.width() / 2,
-                             self.graphwidget.height() / 2)
+        # Получение размеров области отрисовки
+        self.width = self.graphWidget.width()
+        self.height = self.graphWidget.height()
+        self.origin = QPoint(self.width / 2, self.height / 2)
         self.grid()
         self.labels()
         self.labelsPX()
