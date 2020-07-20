@@ -24,7 +24,7 @@ class MainWindow(QWidget):
 
     def CreateUi(self):
         # Параметры окна
-        self.setWindowTitle("")
+        self.setWindowTitle("DrawerGraph")
         self.resize(700, 380)
         self.icon = QIcon("icon/icon.png")
         self.setWindowIcon(self.icon)
