@@ -7,19 +7,23 @@ from PySide2.QtCore import QPropertyAnimation, Property, QPointF
 from drawer import Drawer
 
 
+# Область отрисовки графика
 class GraphWidget(QWidget):
 
     def __init__(self, a, polar):
         super().__init__()
+        # Определение полученных переменных
         self.a = a
-        self.animParam = a * 10
         self.polar = polar
+        # Параметр a с коэффициентом для анимации
+        self.animParam = a * 10
+        # Переменные для анимации
+        self.anim = QPropertyAnimation(self, b"animationTime")
         self.painter = QPainter()
-        self.setMinimumSize(472, 360)
         self.time = -12
         self.animation = False
-        self.anim = QPropertyAnimation(self, b"animationTime")
-        self.origin = QPointF(472 / 2, 360 / 2)
+        # Параметр области отрисовки
+        self.setMinimumSize(472, 360)
 
     def animationTime(self):
         return self.time
@@ -28,18 +32,27 @@ class GraphWidget(QWidget):
         self.time = animationTime
         self.repaint()
 
+    # Установка новых параметров
     def setParams(self, a, polar):
+        # Определение полученных переменных
         self.a = a
-        self.animParam = a * 10
         self.polar = polar
-        self.anim.stop()
-        self.startAnimation()
+        # Параметр a с коэффициентом для анимации
+        self.animParam = a * 10
+        # Перезапуск анимации для новых параметров
+        if self.animation:
+            self.anim.stop()
+            self.startAnimation()
         self.repaint()
 
+    # Ивент отрисовки
     def paintEvent(self, event):
+        # Центр области отрисовки
         self.origin = QPointF(self.width() / 2, self.height() / 2)
+        # Рисование
         self.painter.begin(self)
         Drawer(self, self.painter, self.a, self.polar)
+        # Если включена анимация, то рисуется красный круг
         if self.animation:
             pen = QPen(Qt.red)
             brush = QBrush(Qt.red)
@@ -49,31 +62,43 @@ class GraphWidget(QWidget):
                 self.painter.drawEllipse(self.findPoint(self.time), 3, 3)
         self.painter.end()
 
+    # Запуск анимации
     def startAnimation(self):
         self.animation = True
+        # Время анимации
         self.anim.setDuration(10000)
+        # Зацикливание
         self.anim.setLoopCount(-1)
+        # Начальное значение времени анимации
         self.anim.setStartValue(floor(self.height() / -35.8 / self.a))
+        # Конечное значение времени анимации
         self.anim.setEndValue(ceil(self.height() / 35.8 / self.a))
+        # Старт
         self.anim.start()
 
+    # Остановка анимации
     def stopAnimation(self):
         self.animation = False
         self.anim.stop()
         self.repaint()
 
+    # Нахождение точки для анимации
     def findPoint(self, t):
         coord = QPointF()
-        self.lastCoord = t
+        # Параметрические формулы кривой
         coord.setX((2 * self.animParam * t ** 2) / (1 + t ** 2))
         coord.setY((2 * self.animParam * t ** 3) / (1 + t ** 2))
+        # Смещение относительно центра координат
         coord += self.origin
         return coord
 
+    # Ивент масштабирования
     def resizeEvent(self, event):
+        # Установка новых начального и конечного значений времени анимации
         self.anim.pause()
         self.anim.setStartValue(floor(self.height() / -35.8 / self.a))
         self.anim.setEndValue(ceil(self.height() / 35.8 / self.a))
         self.anim.resume()
 
+    # Определение нового свойства подсчета времени анимации для виджета
     animationTime = Property(float, animationTime, setAnimationTime)
