@@ -1,3 +1,5 @@
+from math import ceil, floor
+
 from PySide2.QtWidgets import QWidget
 from PySide2.QtGui import QPainter, QPen, Qt, QBrush
 from PySide2.QtCore import QPropertyAnimation, Property, QPointF
@@ -41,15 +43,16 @@ class GraphWidget(QWidget):
             brush = QBrush(Qt.red)
             self.painter.setPen(pen)
             self.painter.setBrush(brush)
-            self.painter.drawEllipse(self.findPoint(self.time), 3, 3)
+            if self.time % 1 != 0.00:
+                self.painter.drawEllipse(self.findPoint(self.time), 3, 3)
         self.painter.end()
 
     def startAnimation(self):
         self.animation = True
         self.anim.setDuration(10000)
         self.anim.setLoopCount(-1)
-        self.anim.setStartValue(-12)
-        self.anim.setEndValue(12)
+        self.anim.setStartValue(floor(self.height() / -35.8 / self.a))
+        self.anim.setEndValue(ceil(self.height() / 35.8 / self.a))
         self.anim.start()
 
     def stopAnimation(self):
@@ -59,9 +62,16 @@ class GraphWidget(QWidget):
 
     def findPoint(self, t):
         coord = QPointF()
+        self.lastCoord = t
         coord.setX((2 * self.animParam * t ** 2) / (1 + t ** 2))
         coord.setY((2 * self.animParam * t ** 3) / (1 + t ** 2))
         coord += self.origin
         return coord
+
+    def resizeEvent(self, event):
+        self.anim.pause()
+        self.anim.setStartValue(floor(self.height() / -35.8 / self.a))
+        self.anim.setEndValue(ceil(self.height() / 35.8 / self.a))
+        self.anim.resume()
 
     animationTime = Property(float, animationTime, setAnimationTime)

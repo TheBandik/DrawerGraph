@@ -1,3 +1,5 @@
+from math import floor, ceil
+
 from PySide2.QtCore import QPointF, Qt
 from PySide2.QtGui import QPen
 
@@ -17,8 +19,9 @@ class Curve():
     def draw(self):
         pen = QPen(Qt.blue, 1, Qt.SolidLine)
         self.painter.setPen(pen)
-        fi = -12
-        while fi <= 12:
+        fi = floor(self.graphwidget.height() / -35.8 / (self.a / 10))
+        end = ceil(self.graphwidget.height() / 35.8 / (self.a / 10))
+        while fi <= end:
             point = QPointF()
             point = self.findPoint(fi)
             if self.first:
