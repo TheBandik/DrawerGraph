@@ -19,10 +19,10 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         # Создание интерфейса
-        self.CreateUi()
+        self.createUi()
         self.show()
 
-    def CreateUi(self):
+    def createUi(self):
         # Параметры окна
         self.setWindowTitle("DrawerGraph")
         self.resize(700, 380)
