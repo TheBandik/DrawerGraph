@@ -26,7 +26,7 @@ class MainWindow(QWidget):
         # Параметры окна
         self.setWindowTitle("DrawerGraph")
         self.resize(700, 380)
-        self.icon = QIcon("icon/icon.png")
+        self.icon = QIcon("icon/icon.ico")
         self.setWindowIcon(self.icon)
 
         # Макеты
